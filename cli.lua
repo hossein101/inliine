@@ -152,7 +152,7 @@ function kick(msg,chat,user)
     return false
     end
   if priv(chat,user) then
-      bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>شما نمیتوانید دیگر مدیران را اخراج کنید!</code>', 'html')
+      bot.sendMessage(msg.chat_id_, msg.id_, 1, ' شما نمیتوانید دیگر مدیران را اخراج کنید! ', 'html')
     else
   bot.changeChatMemberStatus(chat, user, "Kicked")
     end
@@ -163,11 +163,11 @@ function ban(msg,chat,user)
     return false
     end
   if priv(chat,user) then
-      bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>شما نمیتوانید دیگر مدیران را از گروه مسدود کنید!</code>', 'html')
+      bot.sendMessage(msg.chat_id_, msg.id_, 1, ' شما نمیتوانید دیگر مدیران را از گروه مسدود کنید! ', 'html')
     else
   bot.changeChatMemberStatus(chat, user, "Kicked")
   db:sadd(SUDO..'banned'..chat,user)
-  local t = '<code>>کاربر</code> [<b>'..user..'</b>] <code>از گروه مسدود گردید.</code>'
+  local t = ' >کاربر  [ '..user..' ]  از گروه مسدود گردید. '
   bot.sendMessage(msg.chat_id_, msg.id_, 1, t, 1, 'html')
   end
   end
@@ -177,11 +177,11 @@ function banall(msg,chat,user)
     return false
     end
   if priv(chat,user) then
-      bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>شما نمیتوانید دیگر مدیران را از گروه مسدود کنید!</code>', 'html')
+      bot.sendMessage(msg.chat_id_, msg.id_, 1, ' شما نمیتوانید دیگر مدیران را از گروه مسدود کنید! ', 'html')
     else
   bot.changeChatMemberStatus(chat, user, "Kicked")
   db:sadd(SUDO..'banalled',user)
-  local t = '<code>>کاربر</code> [<b>'..user..'</b>] <code>به لیست گلوبال بن ربات اضافه شد و دیگر نمیتواند در گروه هایی که ربات است وارد شود</code>'
+  local t = ' >کاربر  [ '..user..' ]  به لیست گلوبال بن ربات اضافه شد و دیگر نمیتواند در گروه هایی که ربات است وارد شود '
   bot.sendMessage(msg.chat_id_, msg.id_, 1, t, 1, 'html')
   end
   end
@@ -191,10 +191,10 @@ function mute(msg,chat,user)
     return false
     end
   if priv(chat,user) then
-      bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>شما نمیتوانید توانایی گفتگو در گروه را از دیگر مدیران سلب کنید!</code>', 'html')
+      bot.sendMessage(msg.chat_id_, msg.id_, 1, ' شما نمیتوانید توانایی گفتگو در گروه را از دیگر مدیران سلب کنید! ', 'html')
     else
   db:sadd(SUDO..'mutes'..chat,user)
-  local t = '<code>>کاربر</code> [<b>'..user..'</b>] <code>به حالت سکوت کاربران افزوده گردید.</code>'
+  local t = ' >کاربر  [ '..user..' ]  به حالت سکوت کاربران افزوده گردید. '
   bot.sendMessage(msg.chat_id_, msg.id_, 1, t,1, 'html')
   end
   end
@@ -204,7 +204,7 @@ function unban(msg,chat,user)
     return false
     end
    db:srem(SUDO..'banned'..chat,user)
-  local t = '<code>>کاربر</code> [<b>'..user..'</b>] <code>از لیست کاربران مسدود شده خارج گردید.</code>'
+  local t = ' >کاربر  [ '..user..' ]  از لیست کاربران مسدود شده خارج گردید. '
   bot.sendMessage(msg.chat_id_, msg.id_, 1, t,1, 'html')
   end
   ------------------------------------------------------------
@@ -213,7 +213,7 @@ function unban(msg,chat,user)
     return false
     end
    db:srem(SUDO..'banalled',user)
-  local t = '<code>>کاربر</code> [<b>'..user..'</b>] <code>از لیست گلوبال بن حذف شد و میتواند در تمامی گروه هایی که ربات در آن ادمین است فعالیت داشته باشد</code>'
+  local t = ' >کاربر  [ '..user..' ]  از لیست گلوبال بن حذف شد و میتواند در تمامی گروه هایی که ربات در آن ادمین است فعالیت داشته باشد '
   bot.sendMessage(msg.chat_id_, msg.id_, 1, t,1, 'html')
   end
   ------------------------------------------------------------
@@ -222,7 +222,7 @@ function unmute(msg,chat,user)
     return false
     end
    db:srem(SUDO..'mutes'..chat,user)
-  local t = '<code>>کاربر</code> [<b>'..user..'</b>]  <code>از حالت سکوت کاربران حذف گردید.</code>'
+  local t = ' >کاربر  [ '..user..' ]   از حالت سکوت کاربران حذف گردید. '
   bot.sendMessage(msg.chat_id_, msg.id_, 1, t,1, 'html')
   end
   ------------------------------------------------------------
@@ -346,11 +346,11 @@ local ch = msg.chat_id_
   local type = db:hget("warn:settings:"..ch,"swarn")
   if type == "kick" then
     kick(msg,chat,user)
-bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>به دلیل دریافت اخطار بیش ار حد(بیش از حد مجاز) از گروه اخراج گردید و ارتباط آن با گروه قطع گردید.</code>', 1,'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  به دلیل دریافت اخطار بیش ار حد(بیش از حد مجاز) از گروه اخراج گردید و ارتباط آن با گروه قطع گردید. ', 1,'html')
     end
   if type == "ban" then
     if is_banned(chat,user) then else
-bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>به دلیل دریافت اخطار بیش از حداز گروه مسدود گردید و ارتباط آن با گروه قطع گردید.</code>', 1,'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  به دلیل دریافت اخطار بیش از حداز گروه مسدود گردید و ارتباط آن با گروه قطع گردید. ', 1,'html')
       end
 bot.changeChatMemberStatus(chat, user, "Kicked")
   db:sadd(SUDO..'banned'..msg.chat_id_,user)
@@ -366,11 +366,11 @@ bot.sendMessage(msg.chat_id_, msg.id_, 1, '>کاربر ['..user..'] به دلی�
 function trigger_anti_spam(msg,type)
   if type == "kick" then
     kick(msg,msg.chat_id_,msg.sender_user_id_)
-bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..msg.sender_user_id_..'</b>] <code>به دلیل ارسال پیام مکرر(بیش از حد مجاز) از گروه اخراج گردید و ارتباط آن با گروه قطع گردید.</code>', 1,'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..msg.sender_user_id_..' ]  به دلیل ارسال پیام مکرر(بیش از حد مجاز) از گروه اخراج گردید و ارتباط آن با گروه قطع گردید. ', 1,'html')
     end
   if type == "ban" then
     if is_banned(msg.chat_id_,msg.sender_user_id_) then else
-bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..msg.sender_user_id_..'</b>] <code>به دلیل ارسال پیام مکرر(بیش از حد مجاز) از گروه مسدود گردید و ارتباط آن با گروه قطع گردید.</code>', 1,'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..msg.sender_user_id_..' ]  به دلیل ارسال پیام مکرر(بیش از حد مجاز) از گروه مسدود گردید و ارتباط آن با گروه قطع گردید. ', 1,'html')
       end
 bot.changeChatMemberStatus(msg.chat_id_, msg.sender_user_id_, "Kicked")
   db:sadd(SUDO..'banned'..msg.chat_id_,msg.sender_user_id_)
@@ -446,7 +446,7 @@ if chat_type == 'super' then
 --------------------------gp add -------------------------
 if text == 'add' and is_sudoers(msg) then
 db:sadd('bot:gps', msg.chat_id_)
-bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>انجام شد</code>\n<code>گروه به لیست گروه های ربات اضافه شد./nبرای فعال شدن گروه لطفا لینک گروه را ثبت نمایید </code>', 1, 'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >انجام شد \n گروه به لیست گروه های ربات اضافه شد./nبرای فعال شدن گروه لطفا لینک گروه را ثبت نمایید  ', 1, 'html')
 end 
 --------------------------rem add -------------------------
 if text == 'rem' and is_sudoers(msg) then
@@ -455,19 +455,19 @@ db:del(SUDO..'mods:'..msg.chat_id_)
 db:del(SUDO..'owners:'..msg.chat_id_)
 db:del(SUDO..'banned'..msg.chat_id_)
 db:del('bot:rules'..msg.chat_id_)
-bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>انجام شد</code>\n<code>گروه از لیست گروه های ربات پاک شد .</code>', 1, 'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >انجام شد \n گروه از لیست گروه های ربات پاک شد . ', 1, 'html')
 end
 --------------------------set link -----------------------
 if text and text:match('^setlink (.*)') and is_owner(msg) then
 local link = text:match('setlink (.*)')
 db:set(SUDO..'grouplink'..msg.chat_id_, link)
-bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>لینک جدید با موفقیت ذخیره و تغییر یافت.</code>\n <code>سوپر گروه با موفقیت فعال شد </code>', 1, 'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1,' >لینک جدید با موفقیت ذخیره و تغییر یافت. \n  سوپر گروه با موفقیت فعال شد  ', 1, 'html')
 end
 ----------------------start prozhect ----------------------
 if chackgp(msg) then 
 local chcklink = db:get(SUDO..'grouplink'..msg.chat_id_) 
 if not chcklink and is_owner(msg) then 
-bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>لطفا لینک گروه را صبت کنید در غیر اینصورت ربات غیر فعال در گروهتان باقی میماند</code>', 1, 'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >لطفا لینک گروه را صبت کنید در غیر اینصورت ربات غیر فعال در گروهتان باقی میماند ', 1, 'html')
 else 
 local ch = msg.chat_id_
 local user_id = msg.sender_user_id_
@@ -558,7 +558,7 @@ end
     if is_owner(msg) then else
       if is_lock(msg,'pin') then
         if msg.content_.ID == 'MessagePinMessage' then
-      bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>قفل پیغام پین شده فعال است</code>\n<code>شما دارای مقام نمیباشید و امکان پین کردن پیامی را ندارید</code>',1, 'html')
+      bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >قفل پیغام پین شده فعال است \n شما دارای مقام نمیباشید و امکان پین کردن پیامی را ندارید ',1, 'html')
       bot.unpinChannelMessage(msg.chat_id_)
           local PinnedMessage = db:get(SUDO..'pinned'..msg.chat_id_)
           if PinnedMessage then
@@ -723,7 +723,7 @@ end
       end
     if msg.content_ and msg.content_.members_ and msg.content_.members_[0] and msg.content_.members_[0].id_ and is_banned(msg.chat_id_,msg.content_.members_[0].id_) then
       kick(msg,msg.chat_id_,msg.content_.members_[0].id_)
-      bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>کاربر مورد نظر مسدود نمیباشد!</code>',1, 'html')
+      bot.sendMessage(msg.chat_id_, msg.id_, 1, ' کاربر مورد نظر مسدود نمیباشد! ',1, 'html')
       end
 -- check banalls	  
     if msg.sender_user_id_ and is_banall(msg.chat_id_,msg.sender_user_id_) then
@@ -731,7 +731,7 @@ end
       end
     if msg.content_ and msg.content_.members_ and msg.content_.members_[0] and msg.content_.members_[0].id_ and is_banall(msg.chat_id_,msg.content_.members_[0].id_) then
       kick(msg,msg.chat_id_,msg.content_.members_[0].id_)
-      bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>کاربرا مورد نظر گلوبال بن میباشد</code>',1, 'html')
+      bot.sendMessage(msg.chat_id_, msg.id_, 1, ' کاربرا مورد نظر گلوبال بن میباشد ',1, 'html')
       end	    
 -- welcome
     local status_welcome = (db:get(SUDO..'status:welcome:'..msg.chat_id_) or 'disable') 
@@ -830,7 +830,7 @@ end
       local pin = text:match('^lock pin$') or text:match('^unlock pin$')
       if pin and is_owner(msg) then
         elseif pin and not is_owner(msg) then
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>انجام این دستور برای شما مجاز نمیباشد!</code>',1, 'html') 
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' انجام این دستور برای شما مجاز نمیباشد! ',1, 'html') 
         end
         end
     
@@ -839,16 +839,16 @@ end
 	   local ch = msg.chat_id_
       if text == 'flood kick' then
       db:hset("flooding:settings:"..ch ,"flood",'kick') 
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>قفل ارسال پیام مکرر فعال گردید!</code> \n<code>وضعیت</code> > <i>اخراج(کاربر)</i>',1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' قفل ارسال پیام مکرر فعال گردید!  \n وضعیت  > <i>اخراج(کاربر)</i>',1, 'html')
       elseif text == 'flood ban' then
         db:hset("flooding:settings:"..ch ,"flood",'ban') 
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>قفل ارسال پیام مکرر فعال گردید!</code> \n<code>وضعیت</code> > <i>مسدود-سازی(کاربر)</i>',1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' قفل ارسال پیام مکرر فعال گردید!  \n وضعیت  > <i>مسدود-سازی(کاربر)</i>',1, 'html')
         elseif text == 'flood mute' then
         db:hset("flooding:settings:"..ch ,"flood",'mute') 
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>قفل ارسال پیام مکرر فعال گردید!</code> \n<code>وضعیت</code> > <i>سکوت(کاربر)</i>',1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' قفل ارسال پیام مکرر فعال گردید!  \n وضعیت  > <i>سکوت(کاربر)</i>',1, 'html')
         elseif text == 'unlock flood' then
         db:hdel("flooding:settings:"..ch ,"flood") 
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' <code>قفل ارسال پیام مکرر غیرفعال گردید!</code> ',1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, '  قفل ارسال پیام مکرر غیرفعال گردید!  ',1, 'html')
             end
           end
        
@@ -952,7 +952,7 @@ end
         db:sadd(SUDO..'helpsudo:',result.sender_user_id_)
 		db:srem(SUDO..'owners:'..result.chat_id_,result.sender_user_id_)
         local user = result.sender_user_id_
-         bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>به لیست سودو های ربات افزوده گردید.</code>', 1, 'html')
+         bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  به لیست سودو های ربات افزوده گردید. ', 1, 'html')
         end
         if tonumber(tonumber(msg.reply_to_message_id_)) == 0 then
         else
@@ -963,13 +963,13 @@ end
           local user = text:match('setsudo (%d+)')
           db:sadd(SUDO..'helpsudo:',user)
 		  db:srem(SUDO..'owners:'..msg.chat_id_,user)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>به لیست سودو های ربات افزوده گردید.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  به لیست سودو های ربات افزوده گردید. ', 1, 'html')
       end
 --------------- dem sudoers -----------------------#MehTi 
         if text == 'demsudo' and is_sudo(msg) then
         function sudo_reply(extra, result, success)
         db:srem(SUDO..'helpsudo:',result.sender_user_id_)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..result.sender_user_id_..'</b>] <code>از لیست سودوهای ربات حذف گردید .</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..result.sender_user_id_..' ]  از لیست سودوهای ربات حذف گردید . ', 1, 'html')
         end
         if tonumber(msg.reply_to_message_id_) == 0 then
         else
@@ -979,7 +979,7 @@ end
         if text and text:match('^demsudo (%d+)') and is_sudo(msg) then
           local user = text:match('demsudo (%d+)')
          db:srem(SUDO..'helpsudo:',user)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>از لیست سودوهای ربات حذف گردید .</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  از لیست سودوهای ربات حذف گردید . ', 1, 'html')
       end
 --------------- text -----------------------------------  
 	        if is_sudoers(msg) then
@@ -1004,7 +1004,7 @@ end
           if result.id_ then
             banall(msg,msg.chat_id_,result.id_)
             else 
-            text = '<code>کاربر مورد نظر یافت نشد!</code>'
+            text = ' کاربر مورد نظر یافت نشد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
             end
           end
@@ -1031,7 +1031,7 @@ end
           if result.id_ then
             unbanall(msg,msg.chat_id_,result.id_)
             else 
-            text = '<code>کاربر مورد نظر یافت نشد!</code>'
+            text = ' کاربر مورد نظر یافت نشد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
             end
           end
@@ -1046,7 +1046,7 @@ end
         db:sadd(SUDO..'owners:'..msg.chat_id_,result.sender_user_id_)
 		db:srem(SUDO..'helpsudo:',result.sender_user_id_)
         local user = result.sender_user_id_
-         bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>به لیست مالکین گروه افزوده گردید.</code>', 1, 'html')
+         bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  به لیست مالکین گروه افزوده گردید. ', 1, 'html')
         end
         if tonumber(tonumber(msg.reply_to_message_id_)) == 0 then
         else
@@ -1057,12 +1057,12 @@ end
           local user = text:match('ownerset (%d+)')
           db:sadd(SUDO..'owners:'..msg.chat_id_,user)
 		  db:srem(SUDO..'helpsudo:',user)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>به لیست مالکین گروه افزوده گردید.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  به لیست مالکین گروه افزوده گردید. ', 1, 'html')
       end
         if text == 'ownerdem' then
         function prom_reply(extra, result, success)
         db:srem(SUDO..'owners:'..msg.chat_id_,result.sender_user_id_)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..result.sender_user_id_..'</b>] <code>از لیست مالکین گروه حذف گردید و توانایی مدیریت گروه از کاربر گفته شد.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..result.sender_user_id_..' ]  از لیست مالکین گروه حذف گردید و توانایی مدیریت گروه از کاربر گفته شد. ', 1, 'html')
         end
         if tonumber(msg.reply_to_message_id_) == 0 then
         else
@@ -1072,19 +1072,19 @@ end
         if text and text:match('^ownerdem (%d+)') then
           local user = text:match('ownerdem (%d+)')
          db:srem(SUDO..'owners:'..msg.chat_id_,user)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>از لیست مالکین گروه حذف گردید و توانایی مدیریت گروه از کاربر گفته شد.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  از لیست مالکین گروه حذف گردید و توانایی مدیریت گروه از کاربر گفته شد. ', 1, 'html')
       end
         end
       if text == 'delete owners' or text == 'delete ownerlist' then
         db:del(SUDO..'owners:'..msg.chat_id_)
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>به لیست ادمین های ربات افزوده گردید.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >به لیست ادمین های ربات افزوده گردید. ', 1, 'html')
         end
       --------------------------master--------------------------
 	   if text == 'masterset' then
           function prom_reply(extra, result, success)
         db:sadd(SUDO..'masters:'..result.sender_user_id_)
         local master = result.sender_user_id_
-         bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..master..'</b>] <code>به لیست ادمین های ربات افزوده گردید.</code>', 1, 'html')
+         bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..master..' ]  به لیست ادمین های ربات افزوده گردید. ', 1, 'html')
         end
         if tonumber(tonumber(msg.reply_to_message_id_)) == 0 then
         else
@@ -1094,12 +1094,12 @@ end
         if text and text:match('^masterset (%d+)') then
           local master = text:match('masterset (%d+)')
           db:sadd(SUDO..'masters:'..master)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..master..'</b>] <code>به لیست ادمین های ربات افزوده گردید.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..master..' ]  به لیست ادمین های ربات افزوده گردید. ', 1, 'html')
       end
         if text == 'masterdem' then
         function prom_reply(extra, result, success)
         db:srem(SUDO..'masters:'..result.sender_user_id_)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..result.sender_user_id_..'</b>] <code>از لیست ادمین های ربات حذف گردید.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..result.sender_user_id_..' ]  از لیست ادمین های ربات حذف گردید. ', 1, 'html')
         end
         if tonumber(msg.reply_to_message_id_) == 0 then
         else
@@ -1108,19 +1108,19 @@ end
         if text and text:match('^masterdem (%d+)') then
           local master = text:match('masterdem (%d+)')
          db:srem(SUDO..'masters:'..master)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..master..'</b>] <code>از لیست ادمین های ربات حذف گردید.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..master..' ]  از لیست ادمین های ربات حذف گردید. ', 1, 'html')
       end	 
         end
 
 ---------------------reload -------------------------
 	   if text == 'reload' and is_sudo(msg) then
        dofile('./cli.lua') 
- bot.sendMessage(msg.chat_id_, msg.id_, 1,'》 <code>BanG TG Cli</code> <b>Reloaded  ✅</b>', 1, 'html')
+ bot.sendMessage(msg.chat_id_, msg.id_, 1,'》  BanG TG Cli   Reloaded  ✅ ', 1, 'html')
             end
 
 	   if text == 'reload inline' and is_sudo(msg) then
        dofile('./api.lua') 
- bot.sendMessage(msg.chat_id_, msg.id_, 1,'》 <code>BanG TG iNLiNE</code> <b>Reloaded  ✅</b>', 1, 'html')
+ bot.sendMessage(msg.chat_id_, msg.id_, 1,'》  BanG TG iNLiNE   Reloaded  ✅ ', 1, 'html')
             end
 	    if text == 'bang' and is_sudoers(msg) then
     local gps = db:scard("botgp")
@@ -1144,7 +1144,7 @@ end
        end
           if text == 'remlink' then
             db:del(SUDO..'grouplink'..msg.chat_id_)
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>لینک تنظیم شده با موفقیت بازنشانی گردید.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >لینک تنظیم شده با موفقیت بازنشانی گردید. ', 1, 'html')
             end
             if text and text:match('^setname (.*)') then
             local name = text:match('^setname (.*)')
@@ -1152,31 +1152,31 @@ end
             end
         if text == 'welcome enable' then
           db:set(SUDO..'status:welcome:'..msg.chat_id_,'enable')
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>ارسال پیام خوش آمدگویی فعال گردید.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >ارسال پیام خوش آمدگویی فعال گردید. ', 1, 'html')
           end
         if text == 'welcome disable' then
           db:set(SUDO..'status:welcome:'..msg.chat_id_,'disable')
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>ارسال پیام خوش آمدگویی غیرفعال گردید.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >ارسال پیام خوش آمدگویی غیرفعال گردید. ', 1, 'html')
           end
         if text and text:match('^setwelcome (.*)') then
           local welcome = text:match('^setwelcome (.*)')
           db:set(SUDO..'welcome:'..msg.chat_id_,welcome)
-          local t = '<code>>پیغام خوش آمدگویی با موفقیت ذخیره و تغییر یافت.</code>\n<code>>متن پیام خوش آمدگویی تنظیم شده:</code>:\n{<code>'..welcome..'</code>}'
+          local t = ' >پیغام خوش آمدگویی با موفقیت ذخیره و تغییر یافت. \n >متن پیام خوش آمدگویی تنظیم شده: :\n{ '..welcome..' }'
           bot.sendMessage(msg.chat_id_, msg.id_, 1,t, 1, 'html')
           end
         if text == 'delete welcome' then
           db:del(SUDO..'welcome:'..msg.chat_id_,welcome)
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>پیغام خوش آمدگویی بازنشانی گردید و به حالت پیشفرض تنظیم شد.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >پیغام خوش آمدگویی بازنشانی گردید و به حالت پیشفرض تنظیم شد. ', 1, 'html')
           end
         if text == 'owners' or text == 'ownerlist' then
           local list = db:smembers(SUDO..'owners:'..msg.chat_id_)
-          local t = '<code>>لیست مالکین گروه:</code> \n\n'
+          local t = ' >لیست مالکین گروه:  \n\n'
           for k,v in pairs(list) do
-          t = t..k.." - <code>"..v.."</code>\n" 
+          t = t..k.." -  "..v.." \n" 
           end
-          t = t..'\nبرای مشاهده کاربر از دستور زیر استفاده کنید \n<code>/whois [آیدی کاربر]</code>\n مثال :\n <code>/whois 234458457</code>'
+          t = t..'\nبرای مشاهده کاربر از دستور زیر استفاده کنید \n /whois [آیدی کاربر] \n مثال :\n  /whois 234458457 '
           if #list == 0 then
-          t = '<code>>لیست مالکان گروه خالی میباشد!</code>'
+          t = ' >لیست مالکان گروه خالی میباشد! '
           end
           bot.sendMessage(msg.chat_id_, msg.id_, 1,t, 1, 'html')
       end
@@ -1184,7 +1184,7 @@ end
         function prom_reply(extra, result, success)
         db:sadd(SUDO..'mods:'..msg.chat_id_,result.sender_user_id_)
         local user = result.sender_user_id_
-         bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>به مقام مدیریت گروه ارتقاء یافت.</code>', 1, 'html')
+         bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  به مقام مدیریت گروه ارتقاء یافت. ', 1, 'html')
         end
         if tonumber(msg.reply_to_message_id_) == 0 then
         else
@@ -1196,9 +1196,9 @@ end
         function promreply(extra,result,success)
           if result.id_ then
         db:sadd(SUDO..'mods:'..msg.chat_id_,result.id_)
-        text ='<code>>کاربر</code> [<code>'..result.id_..'</code>] <code>به مقام مدیریت گروه ارتقاء یافت.</code>' 
+        text =' >کاربر  [ '..result.id_..' ]  به مقام مدیریت گروه ارتقاء یافت. ' 
             else 
-            text = '<code>کاربر مورد نظر یافت نشد</code>'
+            text = ' کاربر مورد نظر یافت نشد '
             end
            bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
           end
@@ -1207,12 +1207,12 @@ end
         if text and text:match('^modset (%d+)') then
           local user = text:match('modset (%d+)')
           db:sadd(SUDO..'mods:'..msg.chat_id_,user)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>به مقام مدیریت گروه ارتقاء یافت.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  به مقام مدیریت گروه ارتقاء یافت. ', 1, 'html')
       end
         if text == 'moddem' then
         function prom_reply(extra, result, success)
         db:srem(SUDO..'mods:'..msg.chat_id_,result.sender_user_id_)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..result.sender_user_id_..'</b>] <code>از مقام مدیریت گروه عزل گردید.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..result.sender_user_id_..' ]  از مقام مدیریت گروه عزل گردید. ', 1, 'html')
         end
         if tonumber(msg.reply_to_message_id_) == 0 then
         else
@@ -1224,9 +1224,9 @@ end
         function demreply(extra,result,success)
           if result.id_ then
         db:srem(SUDO..'mods:'..msg.chat_id_,result.id_)
-        text = '<code>>کاربر</code> [<b>'..result.id_..'</b>] <code>از مقام مدیریت گروه عزل گردید.</code>'
+        text = ' >کاربر  [ '..result.id_..' ]  از مقام مدیریت گروه عزل گردید. '
             else 
-            text = '<code>کاربر مورد نظر یافت نشد</code>'
+            text = ' کاربر مورد نظر یافت نشد '
             end
            bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
           end
@@ -1235,12 +1235,12 @@ end
         if text and text:match('^modset (%d+)') then
           local user = text:match('modset (%d+)')
           db:sadd(SUDO..'mods:'..msg.chat_id_,user)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>به مقام مدیریت گروه ارتقاء یافت.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  به مقام مدیریت گروه ارتقاء یافت. ', 1, 'html')
       end
         if text and text:match('^moddem (%d+)') then
           local user = text:match('moddem (%d+)')
          db:srem(SUDO..'mods:'..msg.chat_id_,user)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>کاربر</code> [<b>'..user..'</b>] <code>از مقام مدیریت گروه عزل گردید.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >کاربر  [ '..user..' ]  از مقام مدیریت گروه عزل گردید. ', 1, 'html')
       end
   end
       end
@@ -1265,35 +1265,35 @@ end
         if value == 'muteall' then
         local hash = db:get(SUDO..'muteall'..msg.chat_id_)
         if hash then
-         return '<code>فعال</code>'
+         return ' فعال '
           else
-          return '<code>غیرفعال</code>'
+          return ' غیرفعال '
           end
         elseif value == 'welcome' then
         local hash = db:get(SUDO..'welcome:'..msg.chat_id_)
         if hash == 'enable' then
-         return '<code>فعال</code>'
+         return ' فعال '
           else
-          return '<code>غیرفعال</code>'
+          return ' غیرفعال '
           end
         elseif value == 'spam' then
 		local ch = msg.chat_id_
         local hash = db:hget("flooding:settings:"..ch,"flood")
         if hash then
              if db:hget("flooding:settings:"..ch, "flood") == "kick" then
-         return '<code>User-kick</code>'
+         return ' User-kick '
               elseif db:hget("flooding:settings:"..ch,"flood") == "ban" then
-              return '<code>User-ban</code>'
+              return ' User-ban '
 							elseif db:hget("flooding:settings:"..ch,"flood") == "mute" then
-              return '<code>Mute</code>'
+              return ' Mute '
               end
           else
-          return '<code>مجاز</code>'
+          return ' مجاز '
           end
         elseif is_lock(msg,value) then
-          return '<code>غیرمجاز</code>'
+          return ' غیرمجاز '
           else
-          return '<code>مجاز</code>'
+          return ' مجاز '
           end
         end
         ---------------------------------------------------
@@ -1323,42 +1323,42 @@ end
     }, inline, nil)
        end
 	   --[[if text == 'muteslist' then
-        local text = '><b>Group-Filterlist:</b>\n<b>----------------</b>\n'
-        ..'><code>Filter-Photo:</code> |'..getsettings('photo')..'|\n'
-        ..'><code>Filter-Video:</code> |'..getsettings('video')..'|\n'
-        ..'><code>Filter-Audio:</code> |'..getsettings('voice')..'|\n'
-        ..'><code>Filter-Gifs:</code> |'..getsettings('gif')..'|\n'
-        ..'><code>Filter-Music:</code> |'..getsettings('music')..'|\n'
-        ..'><code>Filter-File:</code> |'..getsettings('file')..'|\n'
-        ..'><code>Filter-Text:</code> |'..getsettings('text')..'|\n'
-        ..'><code>Filter-Contacts:</code> |'..getsettings('contact')..'|\n'
-        ..'><code>Filter-Forward:</code> |'..getsettings('forward')..'|\n'
-        ..'><code>Filter(Inline-mod):</code> |'..getsettings('game')..'|\n'
-        ..'><code>Filter-Service(Join):</code> |'..getsettings('tgservice')..'|\n'
-        ..'><code>Mute-Chat:</code> |'..getsettings('muteall')..'|\n'
+        local text = '> Group-Filterlist: \n ---------------- \n'
+        ..'> Filter-Photo:  |'..getsettings('photo')..'|\n'
+        ..'> Filter-Video:  |'..getsettings('video')..'|\n'
+        ..'> Filter-Audio:  |'..getsettings('voice')..'|\n'
+        ..'> Filter-Gifs:  |'..getsettings('gif')..'|\n'
+        ..'> Filter-Music:  |'..getsettings('music')..'|\n'
+        ..'> Filter-File:  |'..getsettings('file')..'|\n'
+        ..'> Filter-Text:  |'..getsettings('text')..'|\n'
+        ..'> Filter-Contacts:  |'..getsettings('contact')..'|\n'
+        ..'> Filter-Forward:  |'..getsettings('forward')..'|\n'
+        ..'> Filter(Inline-mod):  |'..getsettings('game')..'|\n'
+        ..'> Filter-Service(Join):  |'..getsettings('tgservice')..'|\n'
+        ..'> Mute-Chat:  |'..getsettings('muteall')..'|\n'
         bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, '')
        end]]
       if text and text:match('^floodmax (%d+)$') then
 		local ch = msg.chat_id_
           db:hset("flooding:settings:"..ch ,"floodmax" ,text:match('floodmax (.*)'))
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>حداکثر پیام تشخیص ارسال پیام مکرر تنظیم شد به:</code> [<b>'..text:match('floodmax (.*)')..'</b>] <code>تغییر یافت.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >حداکثر پیام تشخیص ارسال پیام مکرر تنظیم شد به:  [ '..text:match('floodmax (.*)')..' ]  تغییر یافت. ', 1, 'html')
         end
         if text and text:match('^floodtime (%d+)$') then
 		local ch = msg.chat_id_
           db:hset("flooding:settings:"..ch ,"floodtime" ,text:match('floodtime (.*)'))
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>حداکثر زمان تشخیص ارسال پیام مکرر تنظیم شد به:</code> [<b>'..text:match('floodtime (.*)')..'</b>] <code>ثانیه.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >حداکثر زمان تشخیص ارسال پیام مکرر تنظیم شد به:  [ '..text:match('floodtime (.*)')..' ]  ثانیه. ', 1, 'html')
         end
         if text == 'link' then
           local link = db:get(SUDO..'grouplink'..msg.chat_id_) 
           if link then
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '➖➖➖➖➖➖➖➖➖\n<b>🌐Group Link👇</b>\n\n👉 '..link..'\n➖➖➖➖➖➖➖➖➖\n⚜️ @BanG_TeaM', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, '➖➖➖➖➖➖➖➖➖\n 🌐Group Link👇 \n\n👉 '..link..'\n➖➖➖➖➖➖➖➖➖\n⚜️ @BanG_TeaM', 1, 'html')
             else
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>لینک ورود به گروه تنظیم نشده است.</code>\n<code>ثبت لینک جدید با دستور</code>\n<b>/setlink</b> <i>link</i>\n<code>امکان پذیر است.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >لینک ورود به گروه تنظیم نشده است. \n ثبت لینک جدید با دستور \n /setlink  <i>link</i>\n امکان پذیر است. ', 1, 'html')
             end
           end
         if text == 'mutechat' then
           db:set(SUDO..'muteall'..msg.chat_id_,true)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '⚜️<code>Mute Chat</code> <b>Has Been Enabled🔇</b>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, '⚜️ Mute Chat   Has Been Enabled🔇 ', 1, 'html')
           end
         if text and text:match('^mutechat (%d+)[mhs]') or text and text:match('^mutechat (%d+) [mhs]') then
           local matches = text:match('^mutechat (.*)')
@@ -1376,11 +1376,11 @@ end
           end
           local hash = SUDO..'muteall'..msg.chat_id_
           db:setex(hash, tonumber(time), true)
-          bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>>فیلتر تمامی گفتگو ها برای مدت زمان</code> [<b>'..time..'</b>] <code>ثانیه فعال گردید.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1, ' >فیلتر تمامی گفتگو ها برای مدت زمان  [ '..time..' ]  ثانیه فعال گردید. ', 1, 'html')
           end
         if text == 'unmutechat' then
           db:del(SUDO..'muteall'..msg.chat_id_)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '⚜️<code>Mute Chat</code> <b>Has Been Disabled🔈</b>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, '⚜️ Mute Chat   Has Been Disabled🔈 ', 1, 'html')
           end
         if text == 'mutechat status' then
           local status = db:ttl(SUDO..'muteall'..msg.chat_id_)
@@ -1388,44 +1388,44 @@ end
             t = 'زمانی برای آزاد شدن چت تعییین نشده است !'
           bot.sendMessage(msg.chat_id_, msg.id_, 1,t, 1, 'html')
             else
-          t = '[<b>'..status..'</b>] <code>ثانیه دیگر تا غیرفعال شدن فیلتر تمامی گفتگو ها باقی مانده است.</code>'
+          t = '[ '..status..' ]  ثانیه دیگر تا غیرفعال شدن فیلتر تمامی گفتگو ها باقی مانده است. '
           bot.sendMessage(msg.chat_id_, msg.id_, 1,t, 1, 'html')
           end
           end
     if text == 'bans' or text == 'banlist' then
           local list = db:smembers(SUDO..'banned'..msg.chat_id_)
-          local t = '<code>>لیست افراد مسدود شده از گروه:</code> \n\n'
+          local t = ' >لیست افراد مسدود شده از گروه:  \n\n'
           for k,v in pairs(list) do
-          t = t..k.." - <code>"..v.."</code>\n" 
+          t = t..k.." -  "..v.." \n" 
           end
-          t = t..'\n<code>>برای مشاهده کاربر از دستور زیر استفاده کنید </code>\n<code>/whois [آیدی کاربر]</code>\n مثال :\n <code>/whois 159887854</code>'
+          t = t..'\n >برای مشاهده کاربر از دستور زیر استفاده کنید  \n /whois [آیدی کاربر] \n مثال :\n  /whois 159887854 '
           if #list == 0 then
-          t = '<code>>لیست افراد مسدود شده از گروه خالی میباشد.</code>'
+          t = ' >لیست افراد مسدود شده از گروه خالی میباشد. '
           end
           bot.sendMessage(msg.chat_id_, msg.id_, 1,t, 1, 'html')
       end
       if text == 'delete bans' or text == 'delete banlist' then
         db:del(SUDO..'banned'..msg.chat_id_)
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>لیست کاربران مسدود شده از گروه با موفقیت بازنشانی گردید.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >لیست کاربران مسدود شده از گروه با موفقیت بازنشانی گردید. ', 1, 'html')
         end
 		
 -------------------------------------
 		
    if text == 'banalls' or text == 'gbanlist' then
           local list = db:smembers(SUDO..'banalled')
-          local t = '<code>>لیست افراد مسدود شده از گروه:</code> \n\n'
+          local t = ' >لیست افراد مسدود شده از گروه:  \n\n'
           for k,v in pairs(list) do
-          t = t..k.." - <code>"..v.."</code>\n" 
+          t = t..k.." -  "..v.." \n" 
           end
-          t = t..'\n<code>>برای مشاهده کاربر از دستور زیر استفاده کنید </code>\n<code>/whois [آیدی کاربر]</code>\n مثال :\n <code>/whois 159887854</code>'
+          t = t..'\n >برای مشاهده کاربر از دستور زیر استفاده کنید  \n /whois [آیدی کاربر] \n مثال :\n  /whois 159887854 '
           if #list == 0 then
-          t = '<code>>لیست افراد مسدود شده از گروه خالی میباشد.</code>'
+          t = ' >لیست افراد مسدود شده از گروه خالی میباشد. '
           end
           bot.sendMessage(msg.chat_id_, msg.id_, 1,t, 1, 'html')
       end
       if text == 'delete banalls' or text == 'delete gbanlist' then
         db:del(SUDO..'banalled')
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>لیست کاربران مسدود شده از گروه با موفقیت بازنشانی گردید.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >لیست کاربران مسدود شده از گروه با موفقیت بازنشانی گردید. ', 1, 'html')
         end	
 		
 -------------------------------------
@@ -1433,11 +1433,11 @@ end
 		
         if text == 'mutes' or text == 'silentlist' then
           local list = db:smembers(SUDO..'mutes'..msg.chat_id_)
-          local t = '<code>لیست کاربران حالت سکوت</code> \n\n'
+          local t = ' لیست کاربران حالت سکوت  \n\n'
           for k,v in pairs(list) do
-          t = t..k.." - <code>"..v.."</code>\n" 
+          t = t..k.." -  "..v.." \n" 
           end
-          t = t..'\n<code>>برای مشاهده کاربر از دستور زیر استفاده کنید </code> \n<code>/whois [آیدی کاربر]</code>\n مثال :\n <code>/whois 159887854</code>'
+          t = t..'\n >برای مشاهده کاربر از دستور زیر استفاده کنید   \n /whois [آیدی کاربر] \n مثال :\n  /whois 159887854 '
           if #list == 0 then
           t = 'لیست افراد میوت شده خالی است !'
           end
@@ -1445,12 +1445,12 @@ end
       end      
       if text == 'delete mutesss' or text == 'delete silentlist' then
         db:del(SUDO..'mutes'..msg.chat_id_)
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>لیست افراد کاربران لیست سکوت با موفقیت حذف گردید..</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >لیست افراد کاربران لیست سکوت با موفقیت حذف گردید.. ', 1, 'html')
         end
       if text == 'kick' and tonumber(msg.reply_to_message_id_) > 0 then
         function kick_by_reply(extra, result, success)
         kick(msg,msg.chat_id_,result.sender_user_id_)
-			text1 = '<code>کاربر مورد نظر اخراج شد!</code>'
+			text1 = ' کاربر مورد نظر اخراج شد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text1, 1, 'html')
           end
         bot.getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),kick_by_reply)
@@ -1458,7 +1458,7 @@ end
 		
       if text and text:match('^kick (%d+)') then
         kick(msg,msg.chat_id_,text:match('kick (%d+)'))
-		            text1 = '<code>کاربر مورد نظر اخراج شد!</code>'
+		            text1 = ' کاربر مورد نظر اخراج شد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text1, 1, 'html')
         end
       if text and text:match('^kick @(.*)') then
@@ -1467,12 +1467,12 @@ end
           if result.id_ then
             kick(msg,msg.chat_id_,result.id_)
             else 
-            text = '<code>کاربر مورد نظر یافت نشد!</code>'
+            text = ' کاربر مورد نظر یافت نشد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
             end
           end
         bot.resolve_username(username,kick_username)
-				  		            text2 = '<code>کاربر مورد نظر اخراج شد!</code>'
+				  		            text2 = ' کاربر مورد نظر اخراج شد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text2, 1, 'html')
         end
 		
@@ -1484,7 +1484,7 @@ end
         end
       if text and text:match('^ban (%d+)') then
         ban(msg,msg.chat_id_,text:match('^ban (%d+)'))
-				            text1 = '<code>کاربر مورد نظر بن شد!</code>'
+				            text1 = ' کاربر مورد نظر بن شد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text1, 1, 'html')
         end
       if text and text:match('^ban @(.*)') then
@@ -1493,12 +1493,12 @@ end
           if result.id_ then
             ban(msg,msg.chat_id_,result.id_)
             else 
-            text = '<code>کاربر مورد نظر یافت نشد!</code>'
+            text = ' کاربر مورد نظر یافت نشد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
             end
           end
         bot.resolve_username(username,banusername)
-				            text1 = '<code>کاربر مورد نظر بن شد!</code>'
+				            text1 = ' کاربر مورد نظر بن شد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text1, 1, 'html')
         end
       if text == 'unban' and tonumber(msg.reply_to_message_id_) > 0 then
@@ -1516,7 +1516,7 @@ end
           if result.id_ then
             unban(msg,msg.chat_id_,result.id_)
             else 
-            text = '<code>کاربر مورد نظر یافت نشد!</code>'
+            text = ' کاربر مورد نظر یافت نشد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
             end
           end
@@ -1537,7 +1537,7 @@ end
           if result.id_ then
             mute(msg,msg.chat_id_,result.id_)
             else 
-            text = '<code>کاربر مورد نظر یافت نشد!</code>'
+            text = ' کاربر مورد نظر یافت نشد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
             end
           end
@@ -1558,7 +1558,7 @@ end
           if result.id_ then
             unmute(msg,msg.chat_id_,result.id_)
             else 
-            text = '<code>کاربر مورد نظر یافت نشد!</code>'
+            text = ' کاربر مورد نظر یافت نشد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
             end
           end
@@ -1579,7 +1579,7 @@ end
           if result.id_ then
         bot.addChatMembers(msg.chat_id_,{[0] = result.id_})
             else 
-            text = '<code>کاربر مورد نظر یافت نشد!</code>'
+            text = ' کاربر مورد نظر یافت نشد! '
             bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
             end
           end
@@ -1591,23 +1591,23 @@ end
 	if text and text:match('^warnmax (%d+)$') then
 		local ch = msg.chat_id_
         db:hset("warn:settings:"..ch ,"warnmax" ,text:match('warnmax (%d+)'))
-        bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>حداکثر اخطار به تعداد:</code> [<b>'..text:match('warnmax (.*)')..'</b>] <code>تغییر یافت.</code>', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1,' >حداکثر اخطار به تعداد:  [ '..text:match('warnmax (.*)')..' ]  تغییر یافت. ', 1, 'html')
 end
 -- lock flood settings
 if text and is_owner(msg) then
 local ch = msg.chat_id_
 if text == 'warn kick' then
 db:hset("warn:settings:"..ch ,"swarn",'kick') 
-bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>وضعیت اخطار در گروه تغییر کرد</code> \n<code>وضعیت</code> > <i>اخراج(کاربر)</i>',1, 'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, ' وضعیت اخطار در گروه تغییر کرد  \n وضعیت  > <i>اخراج(کاربر)</i>',1, 'html')
 elseif text == 'warn ban' then
 db:hset("warn:settings:"..ch ,"swarn",'ban') 
-bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>وضعیت اخطار در گروه تغییر کرد</code> \n<code>وضعیت</code> > <i>مسدود-سازی(کاربر)</i>',1, 'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, ' وضعیت اخطار در گروه تغییر کرد  \n وضعیت  > <i>مسدود-سازی(کاربر)</i>',1, 'html')
 elseif text == 'warn mute' then
 db:hset("warn:settings:"..ch ,"swarn",'mute') 
-bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>وضعیت اخطار در گروه تغییر کرد</code> \n<code>وضعیت</code> > <i>سکوت(کاربر)</i>',1, 'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, ' وضعیت اخطار در گروه تغییر کرد  \n وضعیت  > <i>سکوت(کاربر)</i>',1, 'html')
 elseif text == 'warn reset' then
 db:hset("warn:settings:"..ch ,"swarn",'kick') 
-bot.sendMessage(msg.chat_id_, msg.id_, 1, ' <code>وضعیت اخطار در گروه به حالت پیشفرض تغییر کرد </code> ',1, 'html')
+bot.sendMessage(msg.chat_id_, msg.id_, 1, '  وضعیت اخطار در گروه به حالت پیشفرض تغییر کرد   ',1, 'html')
 end
 end
 
@@ -1622,7 +1622,7 @@ end
          warn(msg,msg.chat_id_,result.sender_user_id_)
 		 else 
 		db:hset('warn:settings:'..result.chat_id_,result.sender_user_id_,nwarn + 1)
-		bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>انجام شد کاربر['..result.sender_user_id_..']به دلیل عدم رعایت ['..(nwarn + 1)..'/'..wmax..']اخطار دریافت کرد</code>',1, 'html')
+		bot.sendMessage(msg.chat_id_, msg.id_, 1, ' انجام شد کاربر['..result.sender_user_id_..']به دلیل عدم رعایت ['..(nwarn + 1)..'/'..wmax..']اخطار دریافت کرد ',1, 'html')
 		end  
 		end 
         bot.getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),swarn_by_reply)
@@ -1724,55 +1724,55 @@ end
 	
     if text == 'managers' or text == 'mods' then
           local list = db:smembers(SUDO..'mods:'..msg.chat_id_)
-          local t = '<code>>لیست مدیران گروه:</code> \n\n'
+          local t = ' >لیست مدیران گروه:  \n\n'
           for k,v in pairs(list) do
-          t = t..k.." - <code>"..v.."</code>\n" 
+          t = t..k.." -  "..v.." \n" 
           end
-          t = t..'\n<code>>برای مشاهده کاربر از دستور زیر استفاده کنید </code> \n<code>/whois [آیدی کاربر]</code>\n مثال :\n <code>/whois 159887854</code>'
+          t = t..'\n >برای مشاهده کاربر از دستور زیر استفاده کنید   \n /whois [آیدی کاربر] \n مثال :\n  /whois 159887854 '
           if #list == 0 then
-          t = '<code>>مدیریت برای این گروه ثبت نشده است.</code>'
+          t = ' >مدیریت برای این گروه ثبت نشده است. '
           end
           bot.sendMessage(msg.chat_id_, msg.id_, 1,t, 1, 'html')
       end
       if text == 'delete mods' or text == 'delete managers' then
         db:del(SUDO..'mods:'..msg.chat_id_)
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>لیست مدیران گروه با موفقیت بازنشانی شد</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >لیست مدیران گروه با موفقیت بازنشانی شد ', 1, 'html')
         end
       if text and text:match('^filter +(.*)') then
         local w = text:match('^filter +(.*)')
          db:sadd(SUDO..'filters:'..msg.chat_id_,w)
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'" '..w..' "  <code>>به لیست کلمات فیلتر شده اضاف گردید!</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,'" '..w..' "   >به لیست کلمات فیلتر شده اضاف گردید! ', 1, 'html')
        end
       if text and text:match('^unfilter +(.*)') then
         local w = text:match('^unfilter +(.*)')
          db:srem(SUDO..'filters:'..msg.chat_id_,w)
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'" '..w..' "  <code>>از لیست کلمات فیلتر شده پاک شد!</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,'" '..w..' "   >از لیست کلمات فیلتر شده پاک شد! ', 1, 'html')
        end
       if text == 'delete filterlist' then
         db:del(SUDO..'filters:'..msg.chat_id_)
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<code>>تمامی کلمات فیلتر شده با موفقیت حذف گردیدند.</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' >تمامی کلمات فیلتر شده با موفقیت حذف گردیدند. ', 1, 'html')
         end
       if text == 'admins' or text == 'adminlist' then
         local function cb(extra,result,success)
         local list = result.members_
-           local t = '<code>>لیست ادمین های گروه:</code>\n\n'
+           local t = ' >لیست ادمین های گروه: \n\n'
           local n = 0
             for k,v in pairs(list) do
            n = (n + 1)
               t = t..n.." - "..v.user_id_.."\n"
                     end
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,t..'\n<code>>برای مشاهده کاربر از دستور زیر استفاده کنید </code> \n<code>/whois [آیدی کاربر]</code>\n مثال :\n <code>/whois 159887854</code>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,t..'\n >برای مشاهده کاربر از دستور زیر استفاده کنید   \n /whois [آیدی کاربر] \n مثال :\n  /whois 159887854 ', 1, 'html')
           end
        bot.channel_get_admins(msg.chat_id_,cb)
       end
       if text == 'filterlist' then
           local list = db:smembers(SUDO..'filters:'..msg.chat_id_)
-          local t = '<code>>لیست کلمات فیلتر شده در گروه:</code> \n\n'
+          local t = ' >لیست کلمات فیلتر شده در گروه:  \n\n'
           for k,v in pairs(list) do
           t = t..k.." - "..v.."\n" 
           end
           if #list == 0 then
-          t = '<code>>لیست کلمات فیلتر شده خالی میباشد</code>'
+          t = ' >لیست کلمات فیلتر شده خالی میباشد '
           end
           bot.sendMessage(msg.chat_id_, msg.id_, 1,t, 1, 'html')
       end
@@ -1783,9 +1783,9 @@ end
         local username = text:match('^whois @(.*)')
         function id_by_username(extra,result,success)
           if result.id_ then
-            text = '<b>⚜️Your UserID</b> 👉 [<code>'..result.id_..'</code>]\n<b>⚜️Your Msg Send<b> 👉 <code>'..(db:get(SUDO..'total:messages:'..msg.chat_id_..':'..result.id_) or 0)..'</code>'
+            text = ' ⚜️Your UserID  👉 [ '..result.id_..' ]\n ⚜️Your Msg Send  👉  '..(db:get(SUDO..'total:messages:'..msg.chat_id_..':'..result.id_) or 0)..' '
             else 
-            text = '<code>کاربر مورد نظر یافت نشد!</code>'
+            text = ' کاربر مورد نظر یافت نشد! '
             end
            bot.sendMessage(msg.chat_id_, msg.id_, 1, text, 1, 'html')
           end
@@ -1793,7 +1793,7 @@ end
         end
           if text == 'gpid' then
             if tonumber(msg.reply_to_message_id_) == 0 then
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>شناسه-گروه</code>: {<b>'..msg.chat_id_..'</b>}', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' شناسه-گروه : { '..msg.chat_id_..' }', 1, 'html')
           end
             end
 			
@@ -1907,12 +1907,12 @@ if msg.reply_to_message_id_ == 0 then
 bot.sendMessage(msg.chat_id_, msg.id_, 1, '*Wtf?!*', 1,'md')
 else 
 bot.pinChannelMessage(msg.chat_id_,msg.reply_to_message_id_,0)
-bot.sendMessage(msg.chat_id_, msg.reply_to_message_id_, 1, "<code>>پیام مورد نظر شما پین شد.</code>", 1, 'html')
+bot.sendMessage(msg.chat_id_, msg.reply_to_message_id_, 1, " >پیام مورد نظر شما پین شد. ", 1, 'html')
 db:set(SUDO..'pinned'..msg.chat_id_,msg.reply_to_message_id_)
    end
    end 
 			 if text == 'bot' then
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<b>BOT Online!</b>', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' BOT Online! ', 1, 'html')
       end
         if text and text:match('whois (%d+)') then
               local id = text:match('whois (%d+)')
@@ -1922,7 +1922,7 @@ db:set(SUDO..'pinned'..msg.chat_id_,msg.reply_to_message_id_)
               end
         if text == "whois" then
         function id_by_reply(extra, result, success)
-        bot.sendMessage(msg.chat_id_, msg.id_, 1, '<code>شناسه:</code> [<b>'..result.sender_user_id_..'</b>]\n<code>تعداد پیام های ارسالی:</code> [<b>'..(db:get(SUDO..'total:messages:'..msg.chat_id_..':'..result.sender_user_id_) or 0)..'</b>]', 1, 'html')
+        bot.sendMessage(msg.chat_id_, msg.id_, 1, ' شناسه:  [ '..result.sender_user_id_..' ]\n تعداد پیام های ارسالی:  [ '..(db:get(SUDO..'total:messages:'..msg.chat_id_..':'..result.sender_user_id_) or 0)..' ]', 1, 'html')
         end
          if tonumber(msg.reply_to_message_id_) == 0 then
           else
@@ -1935,7 +1935,7 @@ db:set(SUDO..'pinned'..msg.chat_id_,msg.reply_to_message_id_)
       end
    -- member
    if text == 'ping' then
-          local a = {"<i>I Am Online *_*</i>","<b>Pong!</b>"}
+          local a = {"<i>I Am Online *_*</i>"," Pong! "}
           bot.sendMessage(msg.chat_id_, msg.id_, 1,''..a[math.random(#a)]..'', 1, 'html')
       end
 	  db:incr("allmsg")
@@ -1960,12 +1960,12 @@ db:set(SUDO..'pinned'..msg.chat_id_,msg.reply_to_message_id_)
     end
 	  if text == 'number' then
          local number = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","43","45","46","47","48","49","50"}  
-          bot.sendMessage(msg.chat_id_, msg.id_, 1,'<b>Your Random Number:</b>\n [<code>'..number[math.random(#number)]..'</code>]', 1, 'html')
+          bot.sendMessage(msg.chat_id_, msg.id_, 1,' Your Random Number: \n [ '..number[math.random(#number)]..' ]', 1, 'html')
       end
     if text and msg_type == 'text' and not is_muted(msg.chat_id_,msg.sender_user_id_) then
        if text == "me" then
          local msgs = db:get(SUDO..'total:messages:'..msg.chat_id_..':'..msg.sender_user_id_)
-         bot.sendMessage(msg.chat_id_, msg.id_, 1, '➖➖➖➖➖➖➖➖\n<b>⚜️Your UserID</b> 👉 <code>'..msg.sender_user_id_..'</code>\n<b>⚜️Your Msg Send</b> 👉 <code>'..msgs..'</code>\n➖➖➖➖➖➖➖➖\n👉 @BanG_TeaM', 1, 'html')
+         bot.sendMessage(msg.chat_id_, msg.id_, 1, '➖➖➖➖➖➖➖➖\n ⚜️Your UserID  👉  '..msg.sender_user_id_..' \n ⚜️Your Msg Send  👉  '..msgs..' \n➖➖➖➖➖➖➖➖\n👉 @BanG_TeaM', 1, 'html')
       end
 end
 end
@@ -1976,67 +1976,67 @@ help = [[متن راهنمای مالک ربات ثبت نشده است.]]
 
   elseif is_owner(msg) then
     help = [[
-	<code>>راهنمای مالکین گروه(اصلی-فرعی)</code>
+	 >راهنمای مالکین گروه(اصلی-فرعی) 
 
-*<b>[/#!]settings</b> --<code>دریافت تنظیمات گروه</code>
-*<b>[/#!]setrules</b> --<code>تنظیم قوانین گروه</code>
-*<b>[/#!]modset</b> @username|reply|user-id --<code>تنظیم مالک فرعی جدید برای گروه با یوزرنیم|ریپلی|شناسه -فرد</code>
-*<b>[/#!]moddem</b> @username|reply|user-id --<code>حذف مالک فرعی از گروه با یوزرنیم|ریپلی|شناسه -فرد</code>
-*<b>[/#!]ownerlist</b> --<code>دریافت لیست مدیران اصلی</code>
-*<b>[/#!]managers</b> --<code>دریافت لیست مدیران فرعی گروه</code>
-*<b>[/#!]setlink</b> <code>link</code> <code>{لینک-گروه} --تنظیم لینک گروه</code>
-*<b>[/#!]link</b> <code>دریافت لینک گروه</code>
-*<b>[/#!]kick</b> @username|reply|user-id <code>اخراج کاربر با ریپلی|یوزرنیم|شناسه</code>
-<b>-------------------------------</b>
-<code>>راهنمای بخش حذف ها</code>
-*<b>[/#!]delete managers</b> <code>{حذف تمامی مدیران فرعی تنظیم شده برای گروه}</code>
-*<b>[/#!]delete welcome</b> <code>{حذف پیغام خوش آمدگویی تنظیم شده برای گروه}</code>
-*<b>[/#!]delete bots</b> <code>{حذف تمامی ربات های موجود در ابرگروه}</code>
-*<b>[/#!]delete silentlist</b> <code>{حذف لیست سکوت کاربران}</code>
-*<b>[/#!]delete filterlist</b> <code>{حذف لیست کلمات فیلتر شده در گروه}</code>
-<b>-------------------------------</b>
-<code>>راهنمای بخش خوش آمدگویی</code>
-*<b>[/#!]welcome enable</b> --<code>(فعال کردن پیغام خوش آمدگویی در گروه)</code>
-*<b>[/#!]welcome disable</b> --<code>(غیرفعال کردن پیغام خوش آمدگویی در گروه)</code>
-*<b>[/#!]setwelcome text</b> --<code>(تنظیم پیغام خوش آمدگویی جدید در گروه)</code>
-<b>-------------------------------</b>
-<code>>راهنمای بخش فیلترگروه</code>
-*<b>[/#!]mutechat</b> --<code>فعال کردن فیلتر تمامی گفتگو ها</code>
-*<b>[/#!]unmutechat</b> --<code>غیرفعال کردن فیلتر تمامی گفتگو ها</code>
-*<b>[/#!]mutechat number(h|m|s)</b> --<code>فیلتر تمامی گفتگو ها بر حسب زمان[ساعت|دقیقه|ثانیه]</code>
-<b>-------------------------------</b>
-<code>>راهنمای دستورات حالت سکوت کاربران</code>
-*<b>[/#!]silentuser</b> @username|reply|user-id <code>--افزودن کاربر به لیست سکوت با یوزرنیم|ریپلی|شناسه -فرد</code>
-*<b>[/#!]unsilentuser</b> @username|reply|user-id <code>--افزودن کاربر به لیست سکوت با یوزرنیم|ریپلی|شناسه -فرد</code>
-*<b>[/#!]silentlist</b> <code>--دریافت لیست کاربران حالت سکوت</code>
-<b>-------------------------------</b>
-<code>>راهنمای بخش فیلتر-کلمات</code>
-*<b>[/#!]filter word</b> <code>--افزودن عبارت جدید به لیست کلمات فیلتر شده</code>
-*<b>[/#!]unfilter word</b> <code>--حذف عبارت جدید از لیست کلمات فیلتر شده</code>
-*<b>[/#!]filterlist</b> <code>--دریافت لیست کلمات فیلتر شده</code>
-<b>-------------------------------</b>
-<code>>راهنمای دستورات تنظیمات ابر-گروه[فیلترها]</code>
-*<b>[/#!]lock|unlock link</b> --<code>(فعال سازی/غیرفعال سازی ارسال تبلیغات)</code>
-*<b>[/#!]lock|unlock username</b> --<code>(فعال سازی/غیرفعال سازی ارسال یوزرنیم)</code>
-*<b>[/#!]lock|unlock sticker</b> --<code>(فعال سازی/غیرفعال سازی ارسال برچسب)</code>
-*<b>[/#!]lock|unlock contact</b> --<code>(فعال سازی/غیرفعال سازی فیتلر  مخاطبین)</code>
-*<b>[/#!]lock|unlock english</b> --<code>(فعال سازی/غیرفعال سازی فیتلر  گفتمان(انگلیسی))</code>
-*<b>[/#!]lock|unlock persian</b> --<code>(فعال سازی/غیرفعال سازی فیتلر  گفتمان(فارسی))</code>
-*<b>[/#!]lock|unlock forward</b> --<code>(فعال سازی/غیرفعال سازی فیتلر  فوروارد)</code>
-*<b>[/#!]lock|unlock photo</b> --<code>(فعال سازی/غیرفعال سازی فیتلر  تصاویر)</code>
-*<b>[/#!]lock|unlock video</b> --<code>(فعال سازی/غیرفعال سازی فیلتر ویدئو)</code>
-*<b>[/#!]lock|unlock gif</b> --<code>(فعال سازی/غیرفعال سازی فیلتر تصاویر-متحرک)</code>
-*<b>[/#!]lock|unlock music</b> --<code>(فعال سازی/غیرفعال سازی فیلتر آهنگ(MP3))</code>
-*<b>[/#!]lock|unlock audio</b> --<code>(فعال سازی/غیرفعال سازی فیلتر صدا(Voice-Audio))</code>
-*<b>[/#!]lock|unlock text</b> --<code>(فعال سازی/غیرفعال سازی فیلتر متن)</code>
-*<b>[/#!]lock|unlock keyboard</b> --<code>(فعال سازی/غیرفعال سازی فیتلر  درون-خطی(کیبرد شیشه))</code>
-*<b>[/#!]lock|unlock tgservice</b> --<code>(فعال سازی/غیرفعال سازی فیتلر  پیام ورود-خروج افراد)</code>
-*<b>[/#!]lock|unlock pin</b> --<code>(مجاز/غیرمجاز کردن پین پیام توسط عضو عادی)</code>
-*<b>[/#!]lock|unlock number(h|m|s)</b> --<code>(مجاز/غیرمجاز کردن ارسال پیغام مکرر)</code>
-<b>-------------------------------</b>
-<code>>راهنمای بخش تنظیم پیغام مکرر</code>
-*<b>[/#!]floodmax number</b> --<code>تنظیم حساسیت نسبت به ارسال پیام مکرر</code>
-*<b>[/#!]floodtime</b> --<code>تنظیم حساسیت نسبت به ارسال پیام مکرر برحسب زمان</code>
+* [/#!]settings  -- دریافت تنظیمات گروه 
+* [/#!]setrules  -- تنظیم قوانین گروه 
+* [/#!]modset  @username|reply|user-id -- تنظیم مالک فرعی جدید برای گروه با یوزرنیم|ریپلی|شناسه -فرد 
+* [/#!]moddem  @username|reply|user-id -- حذف مالک فرعی از گروه با یوزرنیم|ریپلی|شناسه -فرد 
+* [/#!]ownerlist  -- دریافت لیست مدیران اصلی 
+* [/#!]managers  -- دریافت لیست مدیران فرعی گروه 
+* [/#!]setlink   link   {لینک-گروه} --تنظیم لینک گروه 
+* [/#!]link   دریافت لینک گروه 
+* [/#!]kick  @username|reply|user-id  اخراج کاربر با ریپلی|یوزرنیم|شناسه 
+ ------------------------------- 
+ >راهنمای بخش حذف ها 
+* [/#!]delete managers   {حذف تمامی مدیران فرعی تنظیم شده برای گروه} 
+* [/#!]delete welcome   {حذف پیغام خوش آمدگویی تنظیم شده برای گروه} 
+* [/#!]delete bots   {حذف تمامی ربات های موجود در ابرگروه} 
+* [/#!]delete silentlist   {حذف لیست سکوت کاربران} 
+* [/#!]delete filterlist   {حذف لیست کلمات فیلتر شده در گروه} 
+ ------------------------------- 
+ >راهنمای بخش خوش آمدگویی 
+* [/#!]welcome enable  -- (فعال کردن پیغام خوش آمدگویی در گروه) 
+* [/#!]welcome disable  -- (غیرفعال کردن پیغام خوش آمدگویی در گروه) 
+* [/#!]setwelcome text  -- (تنظیم پیغام خوش آمدگویی جدید در گروه) 
+ ------------------------------- 
+ >راهنمای بخش فیلترگروه 
+* [/#!]mutechat  -- فعال کردن فیلتر تمامی گفتگو ها 
+* [/#!]unmutechat  -- غیرفعال کردن فیلتر تمامی گفتگو ها 
+* [/#!]mutechat number(h|m|s)  -- فیلتر تمامی گفتگو ها بر حسب زمان[ساعت|دقیقه|ثانیه] 
+ ------------------------------- 
+ >راهنمای دستورات حالت سکوت کاربران 
+* [/#!]silentuser  @username|reply|user-id  --افزودن کاربر به لیست سکوت با یوزرنیم|ریپلی|شناسه -فرد 
+* [/#!]unsilentuser  @username|reply|user-id  --افزودن کاربر به لیست سکوت با یوزرنیم|ریپلی|شناسه -فرد 
+* [/#!]silentlist   --دریافت لیست کاربران حالت سکوت 
+ ------------------------------- 
+ >راهنمای بخش فیلتر-کلمات 
+* [/#!]filter word   --افزودن عبارت جدید به لیست کلمات فیلتر شده 
+* [/#!]unfilter word   --حذف عبارت جدید از لیست کلمات فیلتر شده 
+* [/#!]filterlist   --دریافت لیست کلمات فیلتر شده 
+ ------------------------------- 
+ >راهنمای دستورات تنظیمات ابر-گروه[فیلترها] 
+* [/#!]lock|unlock link  -- (فعال سازی/غیرفعال سازی ارسال تبلیغات) 
+* [/#!]lock|unlock username  -- (فعال سازی/غیرفعال سازی ارسال یوزرنیم) 
+* [/#!]lock|unlock sticker  -- (فعال سازی/غیرفعال سازی ارسال برچسب) 
+* [/#!]lock|unlock contact  -- (فعال سازی/غیرفعال سازی فیتلر  مخاطبین) 
+* [/#!]lock|unlock english  -- (فعال سازی/غیرفعال سازی فیتلر  گفتمان(انگلیسی)) 
+* [/#!]lock|unlock persian  -- (فعال سازی/غیرفعال سازی فیتلر  گفتمان(فارسی)) 
+* [/#!]lock|unlock forward  -- (فعال سازی/غیرفعال سازی فیتلر  فوروارد) 
+* [/#!]lock|unlock photo  -- (فعال سازی/غیرفعال سازی فیتلر  تصاویر) 
+* [/#!]lock|unlock video  -- (فعال سازی/غیرفعال سازی فیلتر ویدئو) 
+* [/#!]lock|unlock gif  -- (فعال سازی/غیرفعال سازی فیلتر تصاویر-متحرک) 
+* [/#!]lock|unlock music  -- (فعال سازی/غیرفعال سازی فیلتر آهنگ(MP3)) 
+* [/#!]lock|unlock audio  -- (فعال سازی/غیرفعال سازی فیلتر صدا(Voice-Audio)) 
+* [/#!]lock|unlock text  -- (فعال سازی/غیرفعال سازی فیلتر متن) 
+* [/#!]lock|unlock keyboard  -- (فعال سازی/غیرفعال سازی فیتلر  درون-خطی(کیبرد شیشه)) 
+* [/#!]lock|unlock tgservice  -- (فعال سازی/غیرفعال سازی فیتلر  پیام ورود-خروج افراد) 
+* [/#!]lock|unlock pin  -- (مجاز/غیرمجاز کردن پین پیام توسط عضو عادی) 
+* [/#!]lock|unlock number(h|m|s)  -- (مجاز/غیرمجاز کردن ارسال پیغام مکرر) 
+ ------------------------------- 
+ >راهنمای بخش تنظیم پیغام مکرر 
+* [/#!]floodmax number  -- تنظیم حساسیت نسبت به ارسال پیام مکرر 
+* [/#!]floodtime  -- تنظیم حساسیت نسبت به ارسال پیام مکرر برحسب زمان 
 ]]
    elseif is_mod(msg) then
     help = [[از متن راهنمای مالکین گروه استفاده کنید.]]
